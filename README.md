@@ -56,6 +56,7 @@ python manage.py runserver
 #
 
 ### App Preview :
+projects  available at [nismal.in](nismal.in)
 
 
 
