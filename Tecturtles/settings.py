@@ -25,8 +25,7 @@ SECRET_KEY = 'django-insecure-kx1jw+_ot4uj&um7qdsk)+$6#5cin#%#(dkuuy!!xp7y(oc*vj
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['.vercel.app', '.now.sh']
 
 # Application definition
 
@@ -77,10 +76,10 @@ WSGI_APPLICATION = 'Tecturtles.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
 }
 
 
@@ -121,9 +120,7 @@ import os
 
 STATIC_URL = 'static/'
 MEDIA_URL = '/images/'
-STATICFILES_DIRS = [
-    BASE_DIR /'static'
-]
+STATICFILES_DIRS =os.path.join(BASE_DIR, 'static'),
 MEDIA_ROOT = BASE_DIR / 'static/images'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
 
