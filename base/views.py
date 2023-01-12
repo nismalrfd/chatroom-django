@@ -20,13 +20,13 @@ def loginage(request):
     if request.user.is_authenticated:
         return redirect('home')
     if request.method == 'POST':
-        username = request.POST.get('username')
+        email = request.POST.get('email')
         password = request.POST.get('password')
         try:
-            user = User.objects.get(username=username)
+            user = User.objects.get(email=email)
         except:
             messages.error(request, 'user does not exist')
-        user = authenticate(request, username=username, password=password)
+        user = authenticate(request, email=email, password=password)
         if user is not None:
             login(request, user)
             return redirect('home')
@@ -191,3 +191,23 @@ def topicPage(request):
 def activityPage(request):
     room_messages =Message.objects.all()
     return render(request,'activity.html',{'room_messages':room_messages})
+def change_password(request):
+    if request.method == 'POST':
+        current_password = request.POST['current_password']
+        new_password = request.POST['new_password']
+        confirm_password = request.POST['confirm_password']
+        if new_password == confirm_password:
+            user = User.objects.get(email=request.user.email)
+            success = user.check_password(current_password)
+            if success:
+                user.set_password(new_password)
+                user.save()
+                messages.success(request, 'Password Reset was Successfull')
+                return redirect('change_password')
+            else:
+                messages.success(request, 'Inavalid Password')
+                return redirect('change_password')
+        else:
+            messages.success(request, 'Passwords Does Not Match')
+            return redirect('updateUser')
+    return render(request, 'change_password.html')
