@@ -8,25 +8,19 @@ from base.models import Room
 from .forms import *
 
 
-# Create your views here.
-# rooms = [
-#     {'id': 1, 'name': 'Lets learn python!'},
-#     {'id': 2, 'name': 'Design with me'},
-#     {'id': 3, 'name': 'Frontend developers'},
-# ]
 
 def loginage(request):
     page = 'login'
     if request.user.is_authenticated:
         return redirect('home')
     if request.method == 'POST':
-        email = request.POST.get('email')
+        username = request.POST.get('username')
         password = request.POST.get('password')
         try:
-            user = User.objects.get(email=email)
+            user = User.objects.get(username=username)
         except:
             messages.error(request, 'user does not exist')
-        user = authenticate(request, email=email, password=password)
+        user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
             return redirect('home')
@@ -38,21 +32,34 @@ def loginage(request):
     return render(request, 'login_register.html', context)
 
 
+
+
 def registerUser(request):
-    form = UserRegisterForm()
     if request.method == 'POST':
-        form = UserRegisterForm(request.POST)
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.username = user.username.lower()
-            user.save()
-            login(request, user)
-            return redirect('home')
-        else:
-            messages.error(request, 'An error during registration')
+        try:
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            confirm_password = request.POST.get('confirm_password')
 
-    return render(request, 'login_register.html', {'form': form})
+            user_obj = User.objects.filter(username=username)
+            if user_obj.exists():
+                messages.warning(request, 'username already exists')
+                return redirect('/register')
+            if confirm_password and password and password != confirm_password:
+                messages.warning(request, 'password not matching !')
+                return redirect('/register')
 
+            user_obj = User.objects.create(username=username)
+
+            user_obj.set_password(password)
+            user_obj.save()
+
+            messages.success(request, 'Account created')
+            return redirect('login')
+        except Exception as e:
+            messages.warning(request, 'Something went wrong')
+
+    return render(request, 'login_register.html')
 
 def logoutUser(request):
     logout(request)
@@ -191,23 +198,3 @@ def topicPage(request):
 def activityPage(request):
     room_messages =Message.objects.all()
     return render(request,'activity.html',{'room_messages':room_messages})
-def change_password(request):
-    if request.method == 'POST':
-        current_password = request.POST['current_password']
-        new_password = request.POST['new_password']
-        confirm_password = request.POST['confirm_password']
-        if new_password == confirm_password:
-            user = User.objects.get(email=request.user.email)
-            success = user.check_password(current_password)
-            if success:
-                user.set_password(new_password)
-                user.save()
-                messages.success(request, 'Password Reset was Successfull')
-                return redirect('change_password')
-            else:
-                messages.success(request, 'Inavalid Password')
-                return redirect('change_password')
-        else:
-            messages.success(request, 'Passwords Does Not Match')
-            return redirect('updateUser')
-    return render(request, 'change_password.html')

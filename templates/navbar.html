@@ -3,7 +3,7 @@
       <div class="container">
         <a href="{% url 'home' %}" class="header__logo">
           <img src="{% static 'images/logo.png' %}" />
-          <h1>TECH TURTLES</h1>
+          <h1>CHAT ROOM</h1>
         </a>
         <form class="header__search" method="GET" action="{% url 'home' %}">
           <label>
@@ -22,7 +22,9 @@
           <div class="header__user">
             <a href="{% url 'userProfile' request.user.id  %}">
               <div class="avatar avatar--medium active">
-                <img src="{{request.user.avatar.url}}" />
+<!--                <img src="{{request.user.avatar.url}}" />-->
+                            <img src="{{user.avatar.url}}" />
+
               </div>
               <p>{{request.user.username}} <span>@{{request.user.username}}</span></p>
             </a>
