@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.http import HttpResponse
@@ -198,3 +198,27 @@ def topicPage(request):
 def activityPage(request):
     room_messages =Message.objects.all()
     return render(request,'activity.html',{'room_messages':room_messages})
+
+
+def changePassword(request):
+    if request.method == 'POST':
+        current_password = request.POST['current_password']
+        new_password = request.POST['new_password']
+        confirm_password = request.POST['confirm_password']
+
+        if request.user.is_authenticated:
+            user = User.objects.get(username=request.user.username)
+            if not user.check_password(current_password):
+                messages.warning(request, "your old password is not correct!")
+            else:
+                if new_password != confirm_password:
+                    messages.warning(request, "your new password not match the confirm password !")
+
+                else:
+                    user.set_password(new_password)
+                    user.save()
+                    update_session_auth_hash(request, user)
+
+                    messages.success(request, "your password has been changed successfuly.!")
+                    return redirect('home')
+    return render(request, 'password_change.html')

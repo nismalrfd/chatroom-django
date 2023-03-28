@@ -37,5 +37,12 @@
         <p class="roomListRoom__topic">{{room.topic.name}}</p>
     </div>
 </div>
+  {% if messages %}
+          <ul class="messages">
+            {% for message in messages %}
+            {{ message }}
+           {% endfor %}
+          </ul>
+            {% endif %}
 {% endfor %}
 

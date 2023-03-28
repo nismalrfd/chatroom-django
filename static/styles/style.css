@@ -61,10 +61,7 @@ a {
   color: var(--color-main);
   text-decoration: none;
 }
-.messages{
-padding-left: 7rem;
-    color: red;
-}
+
 /*========== components ==========*/
 .container {
   max-width: 120rem;
