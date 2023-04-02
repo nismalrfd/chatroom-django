@@ -1,12 +1,11 @@
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from base.models import Room
 from .forms import *
-
 
 
 def loginage(request):
@@ -60,7 +59,6 @@ def registerUser(request):
             messages.warning(request, 'Something went wrong')
 
     return render(request, 'login_register.html')
-
 def logoutUser(request):
     logout(request)
     return redirect('home')
