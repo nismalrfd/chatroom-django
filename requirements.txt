@@ -20,9 +20,6 @@ django-cors-headers==3.8.0
 django-crispy-forms==1.14.0
 django-static-fontawesome==5.14.0.0
 djangorestframework==3.12.4
-feedback==0.1.post7
-filelock==3.8.0
-Flask==2.2.2
 gunicorn==20.1.0
 h11==0.9.0
 hpack==3.0.0
