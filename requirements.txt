@@ -52,8 +52,4 @@ toml==0.10.2
 types-cryptography==3.3.23.1
 tzdata==2022.6
 urllib3==1.26.13
-vine==5.0.0
-virtualenv==20.16.7
-wcwidth==0.2.5
-Werkzeug==2.2.2
-whitenoise==5.2.0
+
