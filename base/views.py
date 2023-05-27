@@ -215,8 +215,7 @@ def changePassword(request):
                 else:
                     user.set_password(new_password)
                     user.save()
-                    update_session_auth_hash(request, user)
-
                     messages.success(request, "your password has been changed successfuly.!")
-                    return redirect('home')
+                    return redirect('/')
+
     return render(request, 'password_change.html')
