@@ -1,6 +1,6 @@
 <div align="center">
 
-# Chat Room
+# Tech Turtles
 -->  is a question and answer website for professional and enthusiast programmers :
 
 
