@@ -67,3 +67,67 @@ if (photoInput)
 // Scroll to Bottom
 const conversationThread = document.querySelector(".room__box");
 if (conversationThread) conversationThread.scrollTop = conversationThread.scrollHeight;
+
+
+
+
+//password not maching
+
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+$(document).ready(function () {
+    $('#password').on('input', function () {
+        var password = $(this).val();
+        var confirmPassword = $('#confirm-password').val();
+
+        // Check if the passwords match
+        checkPasswordMatching(password, confirmPassword);
+
+        // Check the password strength
+        var strength = checkPasswordStrength(password);
+        displayStrength(strength);
+    });
+
+    $('#confirm-password').on('input', function () {
+        var password = $('#password').val();
+        var confirmPassword = $(this).val();
+
+        // Check if the passwords match
+        checkPasswordMatching(password, confirmPassword);
+    });
+
+    function checkPasswordMatching(password, confirmPassword) {
+        var matchDiv = $('#password-match');
+        if (password === confirmPassword) {
+            matchDiv.text('Passwords Match').css('color', 'green');
+        } else {
+            matchDiv.text('Passwords Do Not Match').css('color', 'red');
+        }
+    }
+
+    function checkPasswordStrength(password) {
+        // You can implement your own password strength checking logic here.
+        // For simplicity, we'll just check the length of the password.
+        if (password.length < 8) {
+            return 'Weak';
+        } else if (password.length < 12) {
+            return 'Moderate';
+        } else {
+            return 'Strong';
+        }
+    }
+
+    function displayStrength(strength) {
+        var strengthDiv = $('#password-strength');
+        strengthDiv.text('Password Strength: ' + strength);
+
+        // You can apply different styles based on the strength.
+        if (strength === 'Weak') {
+            strengthDiv.css('color', 'red');
+        } else if (strength === 'Moderate') {
+            strengthDiv.css('color', 'orange');
+        } else {
+            strengthDiv.css('color', 'green');
+        }
+    }
+});
+
