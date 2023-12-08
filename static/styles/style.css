@@ -1166,3 +1166,54 @@ padding-left: 7rem;
   color: var(--color-main);
   font-weight: 1.4rem;
 }
+/* Dropdown button */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-button {
+  background-color: #000000;
+  color: #333333;
+  padding: 8px 12px;
+  border: 1px solid #000000;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+/* Dropdown indicator SVG icon */
+.dropdown-icon {
+  fill: #333333;
+  width: 16px;
+  height: 16px;
+  margin-left: 8px; /* Adjust spacing between the icon and text */
+}
+
+/* Dropdown content */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #ffffff;
+  min-width: 120px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+
+/* Show dropdown content on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Dropdown links */
+.dropdown-link {
+  display: block;
+  padding: 8px 12px;
+  text-decoration: none;
+  color: #333333;
+}
+
+.dropdown-link:hover {
+  background-color: #f5f5f5;
+}
