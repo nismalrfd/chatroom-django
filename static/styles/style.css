@@ -9,7 +9,7 @@
   --color-light: #e5e5e5;
   --color-gray: #8b8b8b;
   --color-light-gray: #b2bdbd;
-  --color-bg: #0a2525;
+  --color-bg: #ffffff;
   --color-success: #5dd693;
   --color-error: #fc4b0b;
 }
@@ -48,7 +48,9 @@ body {
   font-weight: 400;
   font-size: 1.5rem;
   color: var(--color-light-gray);
-  background-color: var(--color-bg);
+  /* background-color: var(--color-bg); */
+  background-color:rgb(255, 255, 255);
+
   min-height: 100vh;
 }
 
@@ -780,7 +782,7 @@ padding-left: 7rem;
 }
 
 .activities__boxRoomContent {
-  background: var(--color-bg);
+  background: rgb(255, 255, 255);
   padding: 1rem;
   border-radius: 5px;
   margin-top: 1rem;
@@ -1057,7 +1059,7 @@ padding-left: 7rem;
 }
 
 .threads {
-  background: var(--color-bg);
+  background: rgb(255, 255, 255);
   border-radius: 0.7rem;
   overflow-y: auto;
   height: 100%;
